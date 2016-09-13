@@ -48,8 +48,9 @@
                            <div class="actions">
 								<?php echo Form::submit(array('value'=>'Login', 'name'=>'submit', 'type'=> 'button','class' => 'btn btn-danger btn-transparent')); ?>
                                 <div class="nav navbar-nav pull-right">
-                                     <?php echo Html::Anchor('view/registration', 'Register Now!', array('class' => 'btn btn-danger btn-transparent')); ?>
-                                 </div>
+                                     <?php echo Html::Anchor('signings/create', 'Register Now!', array('class' => 'btn btn-danger btn-transparent')); ?>
+                                 </div> <br><br><br>
+                                 <?php echo Html::anchor('admin/login/', 'Forgot password?'); ?> 
 							</div>
 						<?php echo Form::close(); ?>
                     </div>

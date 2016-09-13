@@ -28,7 +28,7 @@ class Model_Registered extends \Orm\Model
 		$val = Validation::forge($factory);
 		$val->add_field('name', 'Name', 'required|max_length[255]');
 		$val->add_field('address', 'Address', 'required|max_length[255]');
-		$val->add_field('contact', 'Contact', 'required|valid_string[numeric]');
+		$val->add_field('contact', 'Contact', 'required|max_length[20]');
 		$val->add_field('license', 'License', 'required|max_length[255]');
 		$val->add_field('chief', 'Chief', 'required|max_length[255]');
 

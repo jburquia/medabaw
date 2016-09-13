@@ -4,22 +4,14 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>Hos name</th>
-			<th>Hos address</th>
-			<th>Hos website</th>
-			<th>Email</th>
-			<th>Hos contact</th>
+			<th>Insurance Name</th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 <?php foreach ($insurances as $item): ?>		<tr>
 
-			<td><?php echo $item->hos_name; ?></td>
-			<td><?php echo $item->hos_address; ?></td>
-			<td><?php echo $item->hos_website; ?></td>
-			<td><?php echo $item->email; ?></td>
-			<td><?php echo $item->hos_contact; ?></td>
+			<td><?php echo $item->insurance_name; ?></td>
 			<td>
 				<?php echo Html::anchor('admin/insurances/view/'.$item->id, 'View'); ?> |
 				<?php echo Html::anchor('admin/insurances/edit/'.$item->id, 'Edit'); ?> |

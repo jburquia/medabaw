@@ -1,5 +1,5 @@
 <?php
-class Model_User extends \Orm\Model
+class Model_Medabaw extends \Orm\Model
 {
 	protected static $_properties = array(
 		'id',

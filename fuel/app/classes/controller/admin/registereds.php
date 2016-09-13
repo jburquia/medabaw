@@ -5,7 +5,7 @@ class Controller_Admin_Registereds extends Controller_Admin
 	public function action_index()
 	{
 		$data['registereds'] = Model_Registered::find('all');
-		$this->template->title = "Registereds";
+		$this->template->title = "";
 		$this->template->content = View::forge('admin/registereds/index', $data);
 
 	}
@@ -13,7 +13,6 @@ class Controller_Admin_Registereds extends Controller_Admin
 	public function action_view($id = null)
 	{
 		$data['registered'] = Model_Registered::find($id);
-
 		$this->template->title = "Registered";
 		$this->template->content = View::forge('admin/registereds/view', $data);
 

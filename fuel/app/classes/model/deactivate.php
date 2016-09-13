@@ -1,5 +1,6 @@
-<?php
-class Model_Personal-info extends \Orm\Model
+
+ <?php
+class Model_Deactivate extends \Orm\Model
 {
 	protected static $_properties = array(
 		'id',
@@ -30,7 +31,7 @@ class Model_Personal-info extends \Orm\Model
 		$val->add_field('hos_address', 'Hos Address', 'required|max_length[255]');
 		$val->add_field('hos_website', 'Hos Website', 'required|max_length[255]');
 		$val->add_field('email', 'Email', 'required|valid_email|max_length[255]');
-		$val->add_field('hos_contact', 'Hos Contact', 'required|valid_string[numeric]');
+		$val->add_field('hos_contact', 'Hos Contact', 'required|max_length[20]');
 
 		return $val;
 	}

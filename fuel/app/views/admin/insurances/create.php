@@ -1,7 +1,7 @@
-<h2>New Pending</h2>
+<h2>New Insurances</h2>
 <br>
 
-<?php echo render('admin/pendings/_form'); ?>
+<?php echo render('admin/insurances/_form'); ?>
 
 
-<p><?php echo Html::anchor('admin/pendings', 'Back'); ?></p>
+<p><?php echo Html::anchor('admin/insurances', 'Back'); ?></p>

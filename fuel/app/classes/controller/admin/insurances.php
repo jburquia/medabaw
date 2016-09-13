@@ -5,14 +5,14 @@ class Controller_Admin_Insurances extends Controller_Admin
 	public function action_index()
 	{
 		$data['insurances'] = Model_Insurance::find('all');
-		$this->template->title = "Insurances";
+		$this->template->title = "";
 		$this->template->content = View::forge('admin/insurances/index', $data);
 
 	}
 
 	public function action_view($id = null)
 	{
-		$data['insurance'] = Model_Insurances::find($id);
+		$data['insurance'] = Model_Insurance::find($id);
 
 		$this->template->title = "Insurance";
 		$this->template->content = View::forge('admin/insurances/view', $data);
@@ -23,11 +23,11 @@ class Controller_Admin_Insurances extends Controller_Admin
 	{
 		if (Input::method() == 'POST')
 		{
-			$val = Model_Insurances::validate('create');
+			$val = Model_Insurance::validate('create');
 
 			if ($val->run())
 			{
-				$insurance = Model_Insurances::forge(array(
+				$insurance = Model_Insurance::forge(array(
 					'insurance_name' => Input::post('insurance_name'),
 				));
 
@@ -40,7 +40,7 @@ class Controller_Admin_Insurances extends Controller_Admin
 
 				else
 				{
-					Session::set_flash('error', e('Could not save pending.'));
+					Session::set_flash('error', e('Could not save insurancce.'));
 				}
 			}
 			else
@@ -56,8 +56,8 @@ class Controller_Admin_Insurances extends Controller_Admin
 
 	public function action_edit($id = null)
 	{
-		$insurances= Model_Insurances::find($id);
-		$val = Model_Insurances::validate('edit');
+		$insurance = Model_Insurance::find($id);
+		$val = Model_Insurance::validate('edit');
 
 		if ($val->run())
 		{
@@ -96,7 +96,7 @@ class Controller_Admin_Insurances extends Controller_Admin
 
 	public function action_delete($id = null)
 	{
-		if ($insurance = Model_Insurances::find($id))
+		if ($insurance = Model_Insurance::find($id))
 		{
 			$insurance->delete();
 

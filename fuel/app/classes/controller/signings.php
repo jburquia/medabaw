@@ -1,12 +1,12 @@
 <?php
-class Controller_Admin_Users extends Controller_Admin
+class Controller_Signings extends Controller_Base
 {
 
 	public function action_index()
 	{
 		$data['users'] = Model_User::find('all');
 		$data['roles'] = Model_Role::find('all');
-		$this->template->title = "";
+		$this->template->title = "Users";
 		$this->template->content = View::forge('admin/users/index', $data);
 
 	}
@@ -39,6 +39,7 @@ class Controller_Admin_Users extends Controller_Admin
 					'email' => Input::post('email'),
 					'contact_number' => Input::post('contact_number'),
 					'address' => Input::post('address'),
+					'pend' => Input::post('pend'),
 					'website' => Input::post('website'),
 					'role_id' => Input::post('role_id'),
 					
@@ -63,7 +64,7 @@ class Controller_Admin_Users extends Controller_Admin
 		}
 
 		$this->template->title = "Users";
-		$this->template->content = View::forge('admin/users/create');
+		$this->template->content = View::forge('admin/signings/create');
 
 	}
 
@@ -87,13 +88,12 @@ class Controller_Admin_Users extends Controller_Admin
 			$user->address = Input::post('address');
 			$user->website = Input::post('website');
 			$user->role_id = Input::post('role_id');
-			
 
 			if ($user->save())
 			{
 				Session::set_flash('success', e('Updated user #' . $id));
 
-				Response::redirect('admin/infos');
+				Response::redirect('admin/users');
 			}
 
 			else

@@ -16,10 +16,13 @@
     <script>
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 6
+         // center: {lat: -34.397, lng: 150.644},
+          zoom: 16
         });
+
         var infoWindow = new google.maps.InfoWindow({map: map});
+        var marker = new google.maps.Marker({map: map,animation: google.maps.Animation.DROP, title: 'Current Location'});
+
 
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
@@ -29,8 +32,8 @@
               lng: position.coords.longitude
             };
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
+            marker.setPosition(pos);
+
             map.setCenter(pos);
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
@@ -57,6 +60,7 @@
   </body>
 </html>
 
+
 <?php elseif($current_user->role_id == 2): ?>
   <!DOCTYPE html>
 <html>
@@ -74,20 +78,21 @@
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
-          zoom: 6
+          zoom: 16
         });
         var infoWindow = new google.maps.InfoWindow({map: map});
+        var marker = new google.maps.Marker({map: map,animation: google.maps.Animation.DROP, title: 'Current Location'});
 
         // Try HTML5 geolocation.
-        if (navigator.geolocation) {
+         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
+            marker.setPosition(pos);
+
             map.setCenter(pos);
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
@@ -130,21 +135,23 @@
        function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
-          zoom: 6
+          zoom: 16
+
           
         });
         var infoWindow = new google.maps.InfoWindow({map: map});
+        var marker = new google.maps.Marker({map: map,animation: google.maps.Animation.DROP, title: 'Current Location'});
 
         // Try HTML5 geolocation.
-        if (navigator.geolocation) {
+         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
+            marker.setPosition(pos);
+
             map.setCenter(pos);
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());

@@ -1,4 +1,5 @@
-<?php
+
+ <?php
 
 class Model_Hospital extends \Orm\Model
 {

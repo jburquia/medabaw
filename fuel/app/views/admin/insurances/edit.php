@@ -1,7 +1,7 @@
-<h2>Editing Pending</h2>
+<h2>Editing Insurance</h2>
 <br>
 
-<?php echo render('admin/pendings/_form'); ?>
+<?php echo render('admin/insurances/_form'); ?>
 <p>
-	<?php echo Html::anchor('admin/pendings/view/'.$pending->id, 'View'); ?> |
-	<?php echo Html::anchor('admin/pendings', 'Back'); ?></p>
+	<?php echo Html::anchor('admin/insurances/view/'.$insurance->id, 'View'); ?> |
+	<?php echo Html::anchor('admin/insurances', 'Back'); ?></p>

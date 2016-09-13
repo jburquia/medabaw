@@ -21,10 +21,7 @@
 			<td><?php echo $item->license; ?></td>
 			<td><?php echo $item->chief; ?></td>
 			<td>
-				<?php echo Html::anchor('admin/registereds/view/'.$item->id, 'View'); ?> |
-				<?php echo Html::anchor('admin/registereds/edit/'.$item->id, 'Edit'); ?> |
-				<?php echo Html::anchor('admin/registereds/delete/'.$item->id, 'Delete', array('onclick' => "return confirm('Are you sure?')")); ?>
-
+				<?php echo Html::anchor('admin/registereds/view/'.$item->id, 'View',array('class' => 'btn btn-danger btn-transparent')); ?> 
 			</td>
 		</tr>
 <?php endforeach; ?>	</tbody>

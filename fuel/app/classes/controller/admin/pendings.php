@@ -5,7 +5,8 @@ class Controller_Admin_Pendings extends Controller_Admin
 	public function action_index()
 	{
 		$data['pendings'] = Model_Pending::find('all');
-		$this->template->title = "Pendings";
+		$data['users'] = Model_User::find('all');
+		$this->template->title = "";
 		$this->template->content = View::forge('admin/pendings/index', $data);
 
 	}
@@ -13,8 +14,7 @@ class Controller_Admin_Pendings extends Controller_Admin
 	public function action_view($id = null)
 	{
 		$data['pending'] = Model_Pending::find($id);
-
-		$this->template->title = "Pending";
+		$this->template->title = "";
 		$this->template->content = View::forge('admin/pendings/view', $data);
 
 	}
@@ -60,49 +60,14 @@ class Controller_Admin_Pendings extends Controller_Admin
 
 	public function action_edit($id = null)
 	{
-		$pending = Model_Pending::find($id);
-		$val = Model_Pending::validate('edit');
-
-		if ($val->run())
-		{
-			$pending->hos_name = Input::post('hos_name');
-			$pending->hos_address = Input::post('hos_address');
-			$pending->hos_website = Input::post('hos_website');
-			$pending->email = Input::post('email');
-			$pending->hos_contact = Input::post('hos_contact');
-
-			if ($pending->save())
+		$user = Model_User::find($id);
+			$user->pend = 'activate';
+			if ($user->save())
 			{
-				Session::set_flash('success', e('Updated pending #' . $id));
+				Session::set_flash('success', e('User Accepted '));
 
 				Response::redirect('admin/pendings');
 			}
-
-			else
-			{
-				Session::set_flash('error', e('Could not update pending #' . $id));
-			}
-		}
-
-		else
-		{
-			if (Input::method() == 'POST')
-			{
-				$pending->hos_name = $val->validated('hos_name');
-				$pending->hos_address = $val->validated('hos_address');
-				$pending->hos_website = $val->validated('hos_website');
-				$pending->email = $val->validated('email');
-				$pending->hos_contact = $val->validated('hos_contact');
-
-				Session::set_flash('error', $val->error());
-			}
-
-			$this->template->set_global('pending', $pending, false);
-		}
-
-		$this->template->title = "Pendings";
-		$this->template->content = View::forge('admin/pendings/edit');
-
 	}
 
 	public function action_delete($id = null)

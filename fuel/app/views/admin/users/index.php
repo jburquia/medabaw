@@ -1,6 +1,4 @@
 
-
-
 <br>
 <?php if ($users): ?>
 <table class="table table-striped">
@@ -13,7 +11,7 @@
 	</thead>
 	<tbody>
 <?php foreach ($users as $item): ?>		<tr>
-
+<?php if ($item->pend == 'activate'): ?>
 			<td><?php echo $item->username; ?></td>
 			<?php foreach ($roles as $role): ?>
 				<?php if ($role->id == $item->role_id): ?>
@@ -21,8 +19,9 @@
 				<?php endif ?>
 			<?php endforeach ?>
 			<td><?php echo Html::anchor('admin/users/view/'.$item->id, 'View'); ?> </td>
-			<td><?php echo Html::anchor('admin/users/edit/'.$item->id, 'Edit'); ?> </td>
+			<td><?php echo Html::anchor('admin/users/edit/'.$item->id, 'Edit', array('class' => 'btn btn-danger btn-transparent')); ?> </td>
 			<td><?php echo Html::anchor('admin/users/delete/'.$item->id, 'Delete', array('onclick' => "return confirm('Are you sure?')")); ?></td>
+<?php endif ?>
 		</tr>
 <?php endforeach; ?>	</tbody>
 </table>

@@ -12,6 +12,9 @@ return array (
         3 => '004_create_pendings',
         4 => '005_create_hospitals',
         5 => '006_create_hospitals_2',
+        6 => '007_create_signups',
+        7 => '008_create_signups_2',
+        8 => '009_create_signings',
       ),
     ),
     'module' => 
