@@ -26,29 +26,19 @@
 </table>
 	
 <?php else: ?>
-<p>No Infos.
-</p>
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>Username</th>
-			<th>Email</th>
-			<th>Contact number</th>
-			<th>Address</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
 <?php foreach ($users as $user): ?>		
-	<tr>
-		<?php if ($user->id == $current_user->id): ?>
-			<td><?php echo $user->username?></td>
-			<td><?php echo $user->email?></td>
-			<td><?php echo $user->contact_number?></td>
-			<td><?php echo $user->address?></td>
+	<?php if ($user->id == $current_user->id): ?>
+			<p><?php echo Asset::img($user->image); ?></p></br>
+			<p>Username : <?php echo $user->username?></p></br>
+			<p>Hospital Name : <?php echo $user->hospital_name?></p></br>
+			<p>License Number : <?php echo $user->license?></p></br>
+			<p>Chief of the Hospital: <?php echo $user->chief?></p></br>
+			<p>Email : <?php echo $user->email?></p></br>
+			<p>Contact number : <?php echo $user->contact_number?></p></br>
+			<p>Address : <?php echo $user->address?></p></br>
+			<p>Website : <?php echo $user->website?></p></br>
 			<td><?php echo Html::anchor('admin/users/edit/'.$user->id, 'Update', array('class' => 'btn btn-danger btn-transparent')); ?> </td>
 		<?php endif ?>
-	</tr>
-<?php endforeach; ?>	</tbody>
-</table>
+<?php endforeach; ?>
+		
 <?php endif; ?>

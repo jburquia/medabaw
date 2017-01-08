@@ -4,7 +4,18 @@ class Controller_Admin_Registereds extends Controller_Admin
 
 	public function action_index()
 	{
-		$data['registereds'] = Model_Registered::find('all');
+
+		$search = "";
+		if (Input::method() == 'POST')
+		{
+			$search = Input::post('search');
+		}
+
+		$data['registereds'] = Model_Registered::find('all', [
+			'where' => [
+				['name', 'like', "%$search%"]
+			]
+		]);
 		$this->template->title = "";
 		$this->template->content = View::forge('admin/registereds/index', $data);
 

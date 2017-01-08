@@ -7,6 +7,43 @@ class Controller_Admin_Infos extends Controller_Admin
 		$data['infos'] = Model_Info::find('all');
 		$data['roles'] = Model_Role::find('all');
 		$data['users'] = Model_User::find('all');
+		
+			//send email unta
+			// Create an instance
+			$email = Email::forge();
+
+			// Set the from address
+			$email->from('edzel.abliter@jmc.edu.ph', 'My Name');
+
+			// Set the to address
+			$email->to('edzel.abliter@jmc.edu.ph', 'me niggas');
+
+			// Set a subject
+			$email->subject('This is the subject');
+
+			// Set multiple to addresses
+
+			$email->to(array(
+			    'edzel.abliter@jmc.edu.ph',
+			    'edzel.abliter@jmc.edu.ph' => 'With a Name',
+			));
+
+			// And set the body.
+			$email->body('This is my message');
+			//end send email
+		try
+		{
+		    $email->send();
+		}
+		catch(EmailValidationFailedException $e)
+		{
+		    echo $e;
+		}
+		catch(EmailSendingFailedException $e)
+		{
+		    echo $e;
+		}
+		die;
 		$this->template->title = "";
 		$this->template->content = View::forge('admin/infos/index', $data);
 

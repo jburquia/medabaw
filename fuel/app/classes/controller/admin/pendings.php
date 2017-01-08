@@ -60,14 +60,60 @@ class Controller_Admin_Pendings extends Controller_Admin
 
 	public function action_edit($id = null)
 	{
-		$user = Model_User::find($id);
-			$user->pend = 'activate';
-			if ($user->save())
-			{
-				Session::set_flash('success', e('User Accepted '));
 
-				Response::redirect('admin/pendings');
-			}
+		
+
+		$user = Model_User::find($id);
+		$user->toggle = '1';
+		$user->pend = 'activate';
+
+		// Send Email
+			// Create an instance
+			$email = Email::forge();
+			
+			$tmp_email = $user->email; 
+			var_dump($tmp_email);
+			// Set the from address
+			$email->from('beverly.losoloso@jmc.edu.ph', 'Bebang');
+
+			// Set the to address
+			$email->to($tmp_email, 'kim');
+
+			// Set a subject
+			$email->subject('This is the subject');
+
+			// Set multiple to addresses
+
+			// $email->to(array(
+			//     'example@mail.com',
+			//     'another@mail.com' => 'With a Name',
+			// ));
+
+			// And set the body.
+			$email->body("From: DOH \r\n Congratulations you are now accepted. You may now login to this link: (link).");
+
+			    try
+			    {
+			        $email->send();
+			    }
+			    catch(\EmailValidationFailedException $e)
+			    {
+			        echo $e->getMessage();
+			        // The validation failed
+			    }
+			    catch(\EmailSendingFailedException $e)
+			    {
+			        echo $e;
+			        // The driver could not send the email
+			    }
+		//end Send email
+			    
+		if ($user->save())
+		{
+			Session::set_flash('success', e('User Accepted '));
+
+			Response::redirect('admin/pendings');
+		}
 	}
 
 	public function action_delete($id = null)

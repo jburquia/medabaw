@@ -4,7 +4,17 @@ class Controller_Admin_Insurances extends Controller_Admin
 
 	public function action_index()
 	{
-		$data['insurances'] = Model_Insurance::find('all');
+		$search = "";
+		if (Input::method() == 'POST')
+		{
+			$search = Input::post('search');
+		}
+
+		$data['insurances'] = Model_Insurance::find('all', [
+			'where' => [
+				['insurance_name', 'like', "%$search%"]
+			]
+		]);
 		$this->template->title = "";
 		$this->template->content = View::forge('admin/insurances/index', $data);
 
@@ -28,6 +38,7 @@ class Controller_Admin_Insurances extends Controller_Admin
 			if ($val->run())
 			{
 				$insurance = Model_Insurance::forge(array(
+					'hospital_id' => Auth::get('id'),
 					'insurance_name' => Input::post('insurance_name'),
 				));
 

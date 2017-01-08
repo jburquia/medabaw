@@ -9,10 +9,13 @@
         width: 100%;
         height: 400px;
       }
+      
     </style>
   </head>
   <body>
+
     <div id="map"></div>
+   
     <script>
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -54,7 +57,7 @@
     </script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBwPK1XH19ieyxJZ0QlDL6z2n6JOF83h8&callback=initMap">
-    </script>
+    </script> 
 
   <h1>  <?php echo "Hello!"; ?> </h1> 
   </body>

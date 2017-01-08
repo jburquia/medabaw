@@ -12,8 +12,12 @@ class Model_User extends \Orm\Model
 		'email',
 		'contact_number',
 		'address',
+		'hospital_latitude',
+		'hospital_longitude',
 		'website',
+		'image',
 		'pend',
+		'toggle',
 		'role_id',
 		'created_at',
 		'updated_at',
@@ -32,9 +36,9 @@ class Model_User extends \Orm\Model
 
 	protected static $_has_many = array(
 		'hospital' => array(
-			'model_to' => 'Model_Hospital',
+			'model_to' => 'Model_Doctor',
 			'key_from' => 'id',
-			'key_to' => 'user_id',
+			'key_to' => 'hospital_id',
 			'cascade_delete' => true,
 			'cascade_save' => true,
 		),
@@ -53,8 +57,12 @@ class Model_User extends \Orm\Model
 		$val->add_field('email', 'Email', 'required|valid_email|max_length[255]');
 		$val->add_field('contact_number', 'Contact Number', 'required|max_length[20]');
 		$val->add_field('address', 'Address', 'required|max_length[50]');
+		$val->add_field('hospital_latitude', 'Hospital Latitude', 'required|max_length[255]');
+		$val->add_field('hospital_longitude', 'Hospital longitude', 'required|max_length[255]');
 		$val->add_field('website', 'Website', 'required|max_length[100]');
+		$val->add_field('image', 'Image', 'max_length[255]');
 		$val->add_field('pend', 'Pend', 'required|max_length[70]');
+		$val->add_field('toggle', 'Toggle', 'valid_string[numeric]');
 		$val->add_field('role_id', 'Role ID', 'required|valid_string[numeric]');
 		return $val;
 	}

@@ -3,6 +3,7 @@ class Model_Insurance extends \Orm\Model
 {
 	protected static $_properties = array(
 		'id',
+		'hospital_id',
 		'insurance_name',
 		'created_at',
 		'updated_at',
@@ -22,6 +23,7 @@ class Model_Insurance extends \Orm\Model
 	public static function validate($factory)
 	{
 		$val = Validation::forge($factory);
+		$val->add_field('hospital_id', 'Hospital ID', 'valid_string[numeric]');
 		$val->add_field('insurance_name', 'Insurance Name', 'required|max_length[255]');
 
 		return $val;

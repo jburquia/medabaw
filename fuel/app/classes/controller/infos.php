@@ -6,7 +6,38 @@ class Controller_Infos extends Controller
 	{
 		$data['infos'] = Model_Info::find('all');
 		$data['roles'] = Model_Role::find('all');
+		try {
+			//send email unta
+			// Create an instance
+			$email = Email::forge();
+
+			// Set the from address
+			$email->from('edzel.abliter@jmc.edu.ph', 'My Name');
+
+			// Set the to address
+			$email->to('edzel.abliter@jmc.edu.ph', 'me niggas');
+
+			// Set a subject
+			$email->subject('This is the subject');
+
+			// Set multiple to addresses
+
+			$email->to(array(
+			    'edzel.abliter@jmc.edu.ph',
+			    'edzel.abliter@jmc.edu.ph' => 'With a Name',
+			));
+
+			// And set the body.
+			$email->body('This is my message');
+			//end send email
+		} catch (Exception $e) {
+			echo $e;
+		}
+		
+
+
 		$this->template->title = "Infos";
+		die;
 		$this->template->content = View::forge('infos/index', $data);
 
 	}

@@ -50,7 +50,7 @@
 							</div>
 
                            <div class="actions">
-								<?php echo Form::submit(array('value'=>'Login', 'name'=>'submit', 'class' => 'btn btn-login ladda-button	')); ?>
+								<?php echo Form::submit(array('value'=>'Login', 'name'=>'submit', 'class' =>'btn btn-danger btn-transparent'	')); ?>
 							</div>
 							<?php echo Form::close(); ?>
                         <div class="login-links">

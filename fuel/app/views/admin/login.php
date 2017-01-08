@@ -50,7 +50,7 @@
                                 <div class="nav navbar-nav pull-right">
                                      <?php echo Html::Anchor('signings/create', 'Register Now!', array('class' => 'btn btn-danger btn-transparent')); ?>
                                  </div> <br><br><br>
-                                 <?php echo Html::anchor('admin/login/', 'Forgot password?'); ?> 
+                                 <?php echo Html::anchor('admin/forgotpass/', 'Forgot password?'); ?> 
 							</div>
 						<?php echo Form::close(); ?>
                     </div>

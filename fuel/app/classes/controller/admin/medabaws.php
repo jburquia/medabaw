@@ -5,7 +5,17 @@ class Controller_Admin_Medabaws extends Controller_Admin
 	public function action_index()
 	{
 		$data['pendings'] = Model_Pending::find('all');
-		$data['users'] = Model_User::find('all');
+		$search = "";
+		if (Input::method() == 'POST')
+		{
+			$search = Input::post('search');
+		}
+
+		$data['users'] = Model_User::find('all', [
+			'where' => [
+				['hospital_name', 'like', "%$search%"]
+			]
+		]);
 		$this->template->title = ""; 
 		$this->template->content = View::forge('admin/medabaws/index', $data);
 
@@ -15,7 +25,7 @@ class Controller_Admin_Medabaws extends Controller_Admin
 	{
 		$data['roles'] = Model_User::find($id);
 		$data['users'] = Model_User::find('all');
-		$this->template->title = "Medabaw";
+		$this->template->title = "";
 		$this->template->content = View::forge('admin/medabaws/view', $data);
 
 	}
@@ -66,61 +76,56 @@ class Controller_Admin_Medabaws extends Controller_Admin
 	}
 
 	public function action_edit($id = null)
-	{
-		$medabaw = Model_User::find($id);
-		$val = Model_User::validate('edit');
+	{   
+		$user = Model_User::find($id);
+			$user->pend = 'not activate';
+			// Send Email
+				// Create an instance
+				$email = Email::forge();
+				
+				$tmp_email = $user->email; 
+				
+				// Set the from address
+				$email->from('beverly.losoloso@jmc.edu.ph', 'Bebang');
 
-		if ($val->run())
-		{
-			$medabaw->username = Input::post('username');
-			$medabaw->password = Auth::instance()->hash_password(Input::post('password'));
-			$medabaw->hospital_name = Input::post('hospital_name');
-			$medabaw->license = Input::post('license');
-			$medabaw->chief = Input::post('chief');
-			$medabaw->group = Input::post('group');
-			$medabaw->email = Input::post('email');
-			$medabaw->contact_number = Input::post('contact_number');
-			$medabaw->address = Input::post('address');
-			$medabaw->website = Input::post('website');
-			$medabaw->role_id = Input::post('role_id');
-			if ($medabaw->save())
+				// Set the to address
+				$email->to($tmp_email, 'kim');
+
+				// Set a subject
+				$email->subject('This is the subject');
+
+				// Set multiple to addresses
+
+				// $email->to(array(
+				//     'example@mail.com',
+				//     'another@mail.com' => 'With a Name',
+				// ));
+
+				// And set the body.
+				$email->body("From: DOH \r\n Sorry you account has been deactivated, Please register again");
+
+				    try
+				    {
+				        $email->send();
+				    }
+				    catch(\EmailValidationFailedException $e)
+				    {
+				        echo $e->getMessage();
+				        // The validation failed
+				    }
+				    catch(\EmailSendingFailedException $e)
+				    {
+				        echo $e;
+				        // The driver could not send the email
+				    }
+			//end Send email
+
+			if ($user->save())
 			{
-				Session::set_flash('success', e('Updated medabaw #' . $id));
+				Session::set_flash('success', e('User Deactivated '));
 
-				Response::redirect('admin/medabaws');
+				Response::redirect('admin/deactivates');
 			}
-
-			else
-			{
-				Session::set_flash('error', e('Could not update medabaw #' . $id));
-			}
-		}
-
-		else
-		{
-			if (Input::method() == 'POST')
-			{
-				$medabaw->username = $val->validated('username');
-				$medabaw->password = $val->validated('password');
-				$medabaw->hospital_name = $val->validated('hospital_name');
-				$medabaw->license = $val->validated('license');
-				$medabaw->chief = $val->validated('chief');
-				$medabaw->group = $val->validated('group');
-				$medabaw->email = $val->validated('email');
-				$medabaw->contact_number = $val->validated('contact_number');
-				$medabaw->address = $val->validated('address');
-				$medabaw->website = $val->validated('website');
-				$medabaw->role_id = Input::post('role_id');
-
-				Session::set_flash('error', $val->error());
-			}
-
-			$this->template->set_global('medabaw', $medabaw, false);
-		}
-
-		$this->template->title = "Medabaws";
-		$this->template->content = View::forge('admin/medabaws/edit');
-
 	}
 
 	public function action_delete($id = null)

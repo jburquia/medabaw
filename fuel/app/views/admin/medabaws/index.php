@@ -1,6 +1,18 @@
-
+<h2>List of Hospitals in MeDabaw</h2>
 <br>
-<?php if ($pendings): ?>
+<?php if ($users): ?>
+	<?php echo Form::open(array("class"=>"form-horizontal", "action" => 'admin/medabaws')); ?>
+						<fieldset>
+							<div class="form-group ">
+								<?php $search = ""; ?>
+									
+									<?php echo Form::input('search',  Input::post('search', isset($medabaw) ? $search : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Search' ));  
+									?>
+							</div>
+							
+						</fieldset>
+						
+				<?php echo Form::open(array("class"=>"form-horizontal")); ?>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -19,7 +31,7 @@
 		<td><?php echo $item->email; ?></td>
 		<td><?php echo $item->contact_number; ?></td>
 		<td>
-			<?php echo Html::anchor('admin/medabaws/index/'.$item->id, 'Deactivate',array('class' => 'btn btn-danger btn-transparent')); ?> 
+			<?php echo Html::anchor('admin/medabaws/edit/'.$item->id, 'Deactivate',array('class' => 'btn btn-danger btn-transparent')); ?> 
 		</td>
 	<?php endif ?>
 		</tr>
@@ -27,7 +39,7 @@
 </table>
 
 <?php else: ?>
-<p>No Pendings.</p>
+<p>No usersp.</p>
 
 <?php endif; ?>
 

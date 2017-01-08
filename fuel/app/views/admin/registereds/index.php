@@ -1,6 +1,17 @@
 <h2>List of Registered Hospitals and Clinics in Davao City</h2>
 <br>
 <?php if ($registereds): ?>
+	<?php echo Form::open(array("class"=>"form-horizontal", "action" => 'admin/registereds')); ?>
+						<fieldset>
+							<div class="form-group ">
+								<?php $search = ""; ?>
+									
+									<?php echo Form::input('search',  Input::post('search', isset($registered) ? $search : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Search' ));  
+									?>
+							</div>
+						</fieldset>
+						
+				<?php echo Form::open(array("class"=>"form-horizontal")); ?>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -34,3 +45,4 @@
 	<?php echo Html::anchor('admin/registereds/create', 'Add new Hospitals/Clinics', array('class' => 'btn btn-danger btn-transparent')); ?>
 
 </p>
+

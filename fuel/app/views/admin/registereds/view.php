@@ -1,4 +1,4 @@
-<?php if($current_user->group!=100): ?>
+
 
 <h2>Viewing <?php echo $registered->name; ?></h2>
 
@@ -20,4 +20,5 @@
 
 <?php echo Html::anchor('admin/registereds/edit/'.$registered->id, 'Edit'); ?> |
 <?php echo Html::anchor('admin/registereds', 'Back'); ?>
-<?php endif; ?>
+
+

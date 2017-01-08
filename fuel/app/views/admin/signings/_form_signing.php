@@ -1,4 +1,6 @@
-<?php echo Form::open(array("class"=>"form-horizontal")); ?>
+
+
+<?php echo Form::open(array("class"=>"form-horizontal",'enctype' => 'multipart/form-data')); ?>
 
     <fieldset>
 
@@ -12,7 +14,7 @@
         <div class="form-group">
             <?php echo Form::label('Password', 'password', array('class'=>'control-label')); ?>
 
-                <?php echo Form::input('password', Input::post('password', isset($user) ? $user->password : ''), array('class' => 'col-md-4 form-control', 'type'=> 'password', 'placeholder'=>'Password')); ?>
+                <?php echo Form::input('password', Input::post('password', isset($user) ? $user->password : ''), array('class' => 'col-md-4 form-control', 'type'=> 'password', 'placeholder'=>'Password') ); ?>
 
         </div>
 
@@ -48,14 +50,14 @@
         <div class="form-group">
             <?php echo Form::label('Email', 'email', array('class'=>'control-label')); ?>
 
-                <?php echo Form::input('email', Input::post('email', isset($user) ? $user->email : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Email')); ?>
+                <?php echo Form::input('email', Input::post('email', isset($user) ? $user->email : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Email', 'type'=>'email')); ?>
 
         </div>
 
         <div class="form-group">
             <?php echo Form::label('Contact number', 'contact_number', array('class'=>'control-label')); ?>
 
-                <?php echo Form::input('contact_number', Input::post('contact_number', isset($user) ? $user->contact_number : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Contact number')); ?>
+                <?php echo Form::input('contact_number', Input::post('contact_number', isset($user) ? $user->contact_number : ''), array('class' => 'col-md-4 form-control', 'type' => 'number', 'placeholder'=>'Contact number')); ?>
 
         </div>
         
@@ -74,10 +76,41 @@
 
         </div>
 
+          <!-- <div class="form-group">
+            <?php echo Form::label('Latitude', 'hospital_latitude', array('class'=>'control-label')); ?>
+
+                <?php echo Form::input('hospital_latitude', Input::post('hospital_latitude', isset($user) ? $user->hospital_latitude : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'')); ?>
+
+        </div>
+
+          <div class="form-group">
+            <?php echo Form::label('Latitude', 'hospital_longitude', array('class'=>'control-label')); ?>
+
+                <?php echo Form::input('hospital_longitude', Input::post('hospital_longitude', isset($user) ? $user->hospital_longitude : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'')); ?>
+
+        </div> -->
+        <!-- begin upload image -->
+        <div class="form-group">
+
+                <?php echo Form::label('Upload Image', 'upload_image', array('class'=>'control-label')); ?>
+                <?php echo Form::input(array('type' => 'file', 'name' => 'image')); ?>
+
+        </div>
+        <!-- end upload image -->
+
+
         <div class="form-group">
             <?php echo Form::label('', 'pend', array('class'=>'control-label')); ?>
 
                 <?php echo Form::input('pend', Input::post('pend', isset($user) ? $user->pend : 'not activate'), array('class' => 'col-md-4 form-control', 'placeholder'=>'Pend','type'=>'hidden')); ?>
+
+        </div>
+
+
+        <div class="form-group">
+            <?php echo Form::label('', 'toggle', array('class'=>'control-label')); ?>
+
+                <?php echo Form::input('toggle', Input::post('toggle', isset($user) ? $user->toggle : '0'), array('class' => 'col-md-4 form-control', 'placeholder'=>'Toggle','type'=>'hidden')); ?>
 
         </div>
 
@@ -87,8 +120,145 @@
                 <?php echo Form::input('role_id', Input::post('role_id', isset($user) ? $user->role_id : '1'), array('class' => 'col-md-4 form-control', 'placeholder'=>'Role', 'type'=>'hidden' )); ?>
         </div>
 
-        <div class="form-group">
+        
+   
+
+    <!-- <form action="send.php" method="post"> -->
+    <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location">
+   
+    <input id="searchTextField" type="text" size="50" placeholder="Enter a location" autocomplete="on" runat="server" />  
+    <input  id="city2" name="city2" />
+    <input  id="cityLat" name="hospital_latitude" />
+    <input  id="cityLng" name="hospital_longitude" />
+    <!-- <input type="submit" value="submit"> -->
+  <!-- </form> <--></-->
+    <div  id="map"></div>
+    <div class="form-group">
             <label class='control-label'>&nbsp;</label>
-            <?php echo Form::submit('submit', 'Submit', array('class' => 'btn btn-primary')); ?>      </div>
-    </fieldset>
+            <?php echo Form::submit('submit', 'Submit', array('class' => 'btn btn-primary')); ?>      
+    </div>
+    <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -33.8688, lng: 151.2195},
+          zoom: 13
+        });
+        var input = /** @type {!HTMLInputElement} */(
+            document.getElementById('pac-input'));
+
+        // var autocomplete = new google.maps.places.Autocomplete(input);
+        //     google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        //         var place = autocomplete.getPlace();
+        //         document.getElementById('city2').value = place.name;
+        //         document.getElementById('cityLat').value = place.geometry.location.lat();
+        //         document.getElementById('cityLng').value = place.geometry.location.lng();
+        //         //alert("This function is working!");
+        //         //alert(place.name);
+        //        // alert(place.address_components[0].long_name);
+
+        //     });
+
+
+        var types = document.getElementById('type-selector');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+          map: map,
+          anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+          }
+
+          // If the place has a geometry, then present it on a map.
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+          }
+          marker.setIcon(/** @type {google.maps.Icon} */({
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(35, 35)
+          }));
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+
+          var address = '';
+          if (place.address_components) {
+            address = [
+              (place.address_components[0] && place.address_components[0].short_name || ''),
+              (place.address_components[1] && place.address_components[1].short_name || ''),
+              (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+          }
+
+          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+          infowindow.open(map, marker);
+        });
+
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+        function setupClickListener(id, types) {
+          var radioButton = document.getElementById(id);
+          radioButton.addEventListener('click', function() {
+            autocomplete.setTypes(types);
+          });
+        }
+
+        setupClickListener('changetype-all', []);
+        setupClickListener('changetype-address', ['address']);
+        setupClickListener('changetype-establishment', ['establishment']);
+        setupClickListener('changetype-geocode', ['geocode']);
+      }
+       google.maps.event.addDomListener(window, 'load', initialize); 
+    </script>
+
+
+     
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBwPK1XH19ieyxJZ0QlDL6z2n6JOF83h8&libraries=places&callback=initMap"
+        async defer></script>
+
+
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places" type="text/javascript"></script>
+
+     <script type="text/javascript">
+        function initialize() {
+            var input = document.getElementById('searchTextField');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+                document.getElementById('city2').value = place.name;
+                document.getElementById('cityLat').value = place.geometry.location.lat();
+                document.getElementById('cityLng').value = place.geometry.location.lng();
+                //alert("This function is working!");
+                //alert(place.name);
+               // alert(place.address_components[0].long_name);
+
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize); 
+    </script>
+ </fieldset>
 <?php echo Form::close(); ?>

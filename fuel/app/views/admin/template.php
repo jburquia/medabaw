@@ -65,7 +65,21 @@
 							//START DOH ACCESS
 							if ($current_user->role_id == 2) {
 								if ($section_segment == "registereds" || $section_segment == "pendings" || $section_segment == "infos" || $section_segment == "medabaws" || $section_segment == "deactivates" ) {
-									$section_title = Inflector::humanize($section_segment);
+									
+									if(Inflector::humanize($section_segment) == "Registereds"){
+										$section_title = "Registered in Davao City";
+									}elseif(Inflector::humanize($section_segment) == "Pendings"){
+										$section_title = "List of Pendings";
+									}elseif(Inflector::humanize($section_segment) == "Infos"){
+										$section_title = "Personal Information";
+									}elseif(Inflector::humanize($section_segment) == "Medabaws"){
+										$section_title = "Registered in MeDabaw ";
+									}elseif(Inflector::humanize($section_segment) == "Deactivates"){
+										$section_title = "Deactivated Hospitals";
+									}else{
+										$section_title = Inflector::humanize($section_segment);
+									}
+									
 									?>
 									<li class="<?php echo Uri::segment(2) == $section_segment ? 'active' : '' ?>">
 										<?php echo Html::anchor('admin/'.$section_segment, $section_title) ?>
@@ -77,7 +91,7 @@
 
 							//START ADMIN ACCESS
 							if ($current_user->role_id == 3) {
-								if ($section_segment == "insurances" || $section_segment == "registereds" || $section_segment == "pendings" || $section_segment == "users" || $section_segment == "medabaws" || $section_segment == "deactivates" ) {
+								if ($section_segment == "insurances" || $section_segment == "registereds" || $section_segment == "pendings" || $section_segment == "users" || $section_segment == "medabaws" || $section_segment == "deactivates" || $section_segment == "doctors" || $section_segment == "services") {
 									$section_title = Inflector::humanize($section_segment);
 									?>
 									<li class="<?php echo Uri::segment(2) == $section_segment ? 'active' : '' ?>">
@@ -90,9 +104,22 @@
 
 							//START HOSPITAL ACCESS
 							if ($current_user->role_id == 1){
-							if ($current_user->role_id == 1 && $current_user->pend == 'activate') {
-								if ($section_segment == "insurances" || $section_segment == "infos") {
-									$section_title = Inflector::humanize($section_segment);
+							if ($current_user->role_id == 1 && $current_user->toggle == '1') {
+								if ($section_segment == "insurances" || $section_segment == "infos" || $section_segment == "doctors" || $section_segment == "services") {
+									
+
+									if(Inflector::humanize($section_segment) == "Doctors"){
+										$section_title = "Hospital  Doctor";
+									}elseif(Inflector::humanize($section_segment) == "Infos"){
+										$section_title = "Hospital  Information";
+									}elseif(Inflector::humanize($section_segment) == "Insurances"){
+										$section_title = "Hospital  Insurances";
+									}elseif(Inflector::humanize($section_segment) == "Services"){
+										$section_title = "Medical  Services Offered ";
+									}else{
+										$section_title = Inflector::humanize($section_segment);
+									}
+									
 									?>
 									<li class="<?php echo Uri::segment(2) == $section_segment ? 'active' : '' ?>">
 										<?php echo Html::anchor('admin/'.$section_segment, $section_title) ?>
@@ -157,11 +184,11 @@
 		</div>
 		<hr/>
 		<footer>
-			<p class="pull-right">Page rendered in {exec_time}s using {mem_usage}mb of memory.</p>
+			<!-- <p class="pull-right">Page rendered in {exec_time}s using {mem_usage}mb of memory.</p>
 			<p>
 				<a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license.<br>
 				<small>Version: <?php echo e(Fuel::VERSION); ?></small>
-			</p>
+			</p> -->
 		</footer>
 	</div>
 	 <!-- BEGIN MANDATORY SCRIPTS -->
@@ -190,6 +217,23 @@
     });
 });
     </script>
+
+   <script>
+ var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Password Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
+
 </body>
 </html>
 

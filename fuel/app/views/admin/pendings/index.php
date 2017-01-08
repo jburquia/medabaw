@@ -1,4 +1,4 @@
-<h2>Listing Pendings</h2>
+<h2>Pending Hospitals</h2>
 <br>
 <?php if ($pendings): ?>
 <table class="table table-striped">
@@ -13,7 +13,7 @@
 	</thead>
 	<tbody>
 <?php foreach ($users as $item): ?>		<tr>
-	<?php if ($item->pend == 'not activate'): ?>
+	<?php if ($item->toggle == '0'): ?>
 		<td><?php echo $item->username; ?></td>
 		<td><?php echo $item->address; ?></td>
 		<td><?php echo $item->email; ?></td>
