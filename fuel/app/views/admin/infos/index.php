@@ -28,6 +28,14 @@
 <?php else: ?>
 <?php foreach ($users as $user): ?>		
 	<?php if ($user->id == $current_user->id): ?>
+		<?php if ($user->username == "Doh"){ ?>
+
+			<p>Username : <?php echo $user->username?></p></br>
+			<p>Website : <?php echo $user->website?></p></br>
+			<p>Email : <?php echo $user->email?></p></br>
+			<p>Contact number : <?php echo $user->contact_number?></p></br>
+			<td><?php echo Html::anchor('admin/users/edit/'.$user->id, 'Update', array('class' => 'btn btn-danger btn-transparent')); ?> </td>
+		<?php }else{ ?>
 			<p><?php echo Asset::img($user->image); ?></p></br>
 			<p>Username : <?php echo $user->username?></p></br>
 			<p>Hospital Name : <?php echo $user->hospital_name?></p></br>
@@ -38,7 +46,8 @@
 			<p>Address : <?php echo $user->address?></p></br>
 			<p>Website : <?php echo $user->website?></p></br>
 			<td><?php echo Html::anchor('admin/users/edit/'.$user->id, 'Update', array('class' => 'btn btn-danger btn-transparent')); ?> </td>
-		<?php endif ?>
+		<?php } ?>
+	<?php endif ?>
 <?php endforeach; ?>
 		
 <?php endif; ?>

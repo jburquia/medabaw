@@ -30,9 +30,6 @@
 		<td><?php echo $item->address; ?></td>
 		<td><?php echo $item->email; ?></td>
 		<td><?php echo $item->contact_number; ?></td>
-		<td>
-			<?php echo Html::anchor('admin/deactivates/edit/'.$item->id, 'Activate',array('class' => 'btn btn-danger btn-transparent')); ?> 
-		</td>
 	<?php endif ?>
 		</tr>
 <?php endforeach; ?>	</tbody>

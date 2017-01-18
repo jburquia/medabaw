@@ -56,9 +56,9 @@ class Model_User extends \Orm\Model
 		$val->add_field('group', 'Group', 'required|valid_string[numeric]');
 		$val->add_field('email', 'Email', 'required|valid_email|max_length[255]');
 		$val->add_field('contact_number', 'Contact Number', 'required|max_length[20]');
-		$val->add_field('address', 'Address', 'required|max_length[50]');
-		$val->add_field('hospital_latitude', 'Hospital Latitude', 'required|max_length[255]');
-		$val->add_field('hospital_longitude', 'Hospital longitude', 'required|max_length[255]');
+		$val->add_field('address', 'Address', 'max_length[50]');
+		$val->add_field('hospital_latitude', 'Hospital Latitude', 'max_length[255]');
+		$val->add_field('hospital_longitude', 'Hospital longitude', 'max_length[255]');
 		$val->add_field('website', 'Website', 'required|max_length[100]');
 		$val->add_field('image', 'Image', 'max_length[255]');
 		$val->add_field('pend', 'Pend', 'required|max_length[70]');

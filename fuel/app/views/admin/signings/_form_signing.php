@@ -46,6 +46,24 @@
                 <?php echo Form::input('group', Input::post('group', isset($user) ? $user->group : '100'), array('class' => 'col-md-4 form-control', 'placeholder'=>'Group', 'type'=>'hidden')); ?>
 
         </div>
+         <!-- <form action="send.php" method="post"> -->
+        <!--   <div class="form-group">
+            <?php echo Form::label('Address', 'address', array('class'=>'control-label')); ?>
+
+                <?php echo Form::input('address', Input::post('address', isset($user) ? $user->group : '100'), array('class' => 'col-md-4 form-control', 'placeholder'=>'Group')); ?>
+
+        </div> -->
+    <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location">
+   
+    <input id="searchTextField" type="text" size="50" name="address" placeholder="Enter your address" autocomplete="on" runat="server" />  
+    <input  id="city2" name="city2" type = 'hidden' />
+    <input  id="cityLat" name="hospital_latitude" type = 'hidden' />
+    <input  id="cityLng" name="hospital_longitude" type = 'hidden' />
+    <!-- <input type="submit" value="submit"> -->
+  <!-- </form> <--></-->
+    <div  id="map"></div>
+    
 
         <div class="form-group">
             <?php echo Form::label('Email', 'email', array('class'=>'control-label')); ?>
@@ -62,12 +80,12 @@
         </div>
         
         
-        <div class="form-group">
+       <!--  <div class="form-group">
             <?php echo Form::label('Address', 'address', array('class'=>'control-label')); ?>
 
                 <?php echo Form::input('address', Input::post('address', isset($user) ? $user->address : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Address')); ?>
 
-        </div>
+        </div> -->
 
           <div class="form-group">
             <?php echo Form::label('Website', 'website', array('class'=>'control-label')); ?>
@@ -121,23 +139,12 @@
         </div>
 
         
-   
-
-    <!-- <form action="send.php" method="post"> -->
-    <input id="pac-input" class="controls" type="text"
-        placeholder="Enter a location">
-   
-    <input id="searchTextField" type="text" size="50" placeholder="Enter a location" autocomplete="on" runat="server" />  
-    <input  id="city2" name="city2" />
-    <input  id="cityLat" name="hospital_latitude" />
-    <input  id="cityLng" name="hospital_longitude" />
-    <!-- <input type="submit" value="submit"> -->
-  <!-- </form> <--></-->
-    <div  id="map"></div>
-    <div class="form-group">
+   <div class="form-group">
             <label class='control-label'>&nbsp;</label>
             <?php echo Form::submit('submit', 'Submit', array('class' => 'btn btn-primary')); ?>      
     </div>
+
+   
     <script>
       // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:

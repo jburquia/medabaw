@@ -1,7 +1,7 @@
-<?php echo Form::open(array("class"=>"form-horizontal")); ?>
-
+	<?php echo Form::open(array("class"=>"form-horizontal")); ?>
 	<fieldset>
 		<div class="form-group">
+			
 			<?php echo Form::label('Username', 'username', array('class'=>'control-label')); ?>
 
 				<?php echo Form::input('username', Input::post('username', isset($info) ? $info->username : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Username')); ?>

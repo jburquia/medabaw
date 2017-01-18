@@ -36,45 +36,9 @@ class Controller_Admin_Doctors extends Controller_Admin
 		if (Input::method() == 'POST')
 		{
 			$val = Model_Doctor::validate('create');
-			
+
 			if ($val->run())
 			{
-				$file_img = null;
-				// BEGIN UPLOAD IMAGE
-				// Custom configuration for this upload
-				$config = array(
-				    'path' =>'assets/img',
-				    'randomize' => true,
-				    'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
-				);
-
-				// process the uploaded files in $_FILES
-				Upload::process($config);
-
-				// if there are any valid files
-				if (Upload::is_valid())
-				{
-				    // save them according to the config
-				    Upload::save();
-
-				    // call a model method to update the database
-				   
-				    $file = Upload::get_files();
-				    foreach ($file as $savefile) {
-				    	
-				    }
-				    $file_img = $savefile['saved_as'];
-				}
-
-				// and process any errors
-				foreach (Upload::get_errors() as $file)
-				{
-				    // $file is an array with all file information,
-				    // $file['errors'] contains an array of all error occurred
-				    // each array element is an an array containing 'error' and 'message'
-				}
-				// END UPLOAD IMAGE
-
 				$doctor = Model_Doctor::forge(array(
 					'hospital_id' => Auth::get('id'),
 					'name' => Input::post('name'),
@@ -100,10 +64,11 @@ class Controller_Admin_Doctors extends Controller_Admin
 			}
 		}
 
-		$this->template->title = "";
+		$this->template->title = "Doctors";
 		$this->template->content = View::forge('admin/doctors/create');
 
 	}
+
 
 // edit doctor
 	public function action_edit($id = null)

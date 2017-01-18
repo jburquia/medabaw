@@ -92,6 +92,8 @@ class Controller_Admin_Users extends Controller_Admin
 					'email' => $user->email,
 					'contact_number' => $user->contact_number,
 					'address' => $user->address,
+					'hospital_latitude' => $user->hospital_latitude,
+					'hospital_longitude' => $user->hospital_longitude,
 					'website' => $user->website,
 					'services' => $arr_services,
 					'insurances' => $arr_insurances,
@@ -122,6 +124,7 @@ class Controller_Admin_Users extends Controller_Admin
 	{
 		if (Input::method() == 'POST')
 		{
+
 			$val = Model_User::validate('create');
 
 			if ($val->run())
